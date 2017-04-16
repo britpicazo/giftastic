@@ -1,0 +1,9 @@
+.container{
+	padding-top: 5%;
+}
+
+.jumbotron{
+	padding: 1%;
+	background-color: #5cb85c;
+	color: #ffffff;
+}
