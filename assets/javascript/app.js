@@ -8,30 +8,29 @@ $(document).ready(function(){
 		}
 	}
 
+	renderButtons();
+
 	// Adding a button for movie entered
 	$("#add-movie").on("click", function() {
 		event.preventDefault();
 		var movie = $("#movie-input").val().trim();
-		console.log(movie);
 		$("#movie-buttons").append("<button class='btn btn-success' data-movie='" + movie + "'>" + movie + "</button>");        
 	});
 
-	renderButtons();
+	
 
 	// Getting gifs from api... onto html
 	$("button").on("click", function() {
 		var movie = $(this).attr("data-movie");
-		console.log(movie);
-		var queryURL = "http://api.giphy.com/v1/gifs/search?q=" +
-	        movie + "&api_key=dc6zaTOxFJmzC&limit=10";
-	    console.log(queryURL);
+		var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+	        movie + "&api_key=dc6zaTOxFJmzC&limit=10"
 
 	    $.ajax({
 	    	url: queryURL,
 	    	method: "GET"
 	    }).done(function(response){
 	    	var results = response.data;
-	    	console.log(results.length);
+	    	$("#movies").empty();
 	    	for(var i = 0; i < results.length; i++){
 		    	var movieDiv = $("<div>");
 	          	var p = $("<p>").text("Rating: " + results[i].rating);
@@ -43,6 +42,15 @@ $(document).ready(function(){
 	          	$("#movies").append(movieDiv);
 	         }
 	    });
-	});	
+	});
+
+	// $("img").on("click", function() {
+	// 	console.log("click worked!");
+	// 	var src = movieImg.attr(src);
+	// 	src = src.substring(0, src.length - 10);
+	// 	src += ".url";
+	// 	console.log(src);
+	// 	movieImg.attr("src", src);
+	// });
 
 });
